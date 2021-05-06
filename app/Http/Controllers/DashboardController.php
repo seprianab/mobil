@@ -27,9 +27,9 @@ class DashboardController extends Controller
         $yesterday_number = Sale::selectRaw('COUNT(*) AS number')->whereDate('date', $yesterday)->where('status', 1)->first();
         $yesterday_total = Sale::selectRaw('SUM(car_price) AS total')->whereDate('date', $yesterday)->where('status', 1)->first();
 
-        $today_number_percentage = ($today_number->number - $yesterday_number->number) / $today_number->number * 100;
+        $today_number_percentage = $today_number->number == 0 ? 0 : (($today_number->number - $yesterday_number->number) / $today_number->number * 100);
         $today_number_percentage_plus = $today_number_percentage > 0 ? "+" : "";
-        $today_total_percentage = ($today_total->total - $yesterday_total->total) / $today_total->total * 100;
+        $today_total_percentage = $today_total->total == 0 ? 0 : (($today_total->total - $yesterday_total->total) / $today_total->total * 100);
         $today_total_percentage_plus = $today_total_percentage > 0 ? "+" : "";
 
 
@@ -60,14 +60,14 @@ class DashboardController extends Controller
 
         return view('dashboard', [
             'today' => [
-                'car' => $today_car->car->name,
+                'car' =>  !$today_car ? "-" : $today_car->car->name,
                 'number' => $today_number->number,
                 'number_percentage' => $today_number_percentage_plus . toNumber($today_number_percentage, 2) . "%",
                 'total' => $today_total->total,
                 'total_percentage' => $today_total_percentage_plus . toNumber($today_total_percentage, 2) . "%",
             ],
             'seven' => [
-                'car' => $seven_car->car->name,
+                'car' => !$seven_car ? "-" : $seven_car->car->name,
                 'number' => $seven_number->number,
                 'total' => $seven_total->total,
             ],
