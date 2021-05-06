@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Sale as Model;
 use App\Models\Customer;
 use App\Models\Car;
+use App\Mail\Invoice;
 
 class SaleController extends Controller
 {
@@ -116,10 +118,13 @@ class SaleController extends Controller
             'car_name' => $car->name,
             'car_price' => (double) toSystemNumber($request->car_price),
         ];
-        Model::create($data);
+        $sale = Model::create($data);
 
         // Kurangi stok "Car"
         $car->decrement('stock');
+
+        // Kirim Email
+        Mail::to($request->customer_email)->send(new Invoice($sale));
 
         $request->session()->flash('success', 'New Sale has been created.');
         return successDataResponse([
