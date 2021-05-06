@@ -37,4 +37,11 @@ Route::middleware('auth')->group(function(){
         Route::put('/edit/{id}', 'CustomerController@update');
         Route::delete('/{id}', 'CustomerController@delete')->name('delete');
     });
+
+    Route::prefix('/sale')->name('sale.')->group(function(){
+        Route::get('/', 'SaleController@index')->name('index');
+        Route::get('/create', 'SaleController@create')->name('create');
+        Route::post('/create', 'SaleController@store');
+        Route::put('/cancel/{id}', 'SaleController@cancel')->name('cancel');
+    });
 });

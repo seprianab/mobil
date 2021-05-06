@@ -18,4 +18,10 @@ return [
         'icon' => '<i class="bi bi-people"></i>',
         'url' => '/customer',
     ],
+    [
+        'id' => 'sale',
+        'label' => 'Sale',
+        'icon' => '<i class="bi bi-cash-stack"></i>',
+        'url' => '/sale',
+    ],
 ];

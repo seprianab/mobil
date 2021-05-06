@@ -16,9 +16,17 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->date('date');
+
             $table->integer('customer_id');
+            $table->string('customer_name');
+            $table->string('customer_phone');
+            $table->string('customer_email');
+
             $table->integer('car_id');
-            $table->double('prize');
+            $table->string('car_name');
+            $table->double('car_price');
+
             $table->integer('status')->default(1);  // 1 => active, 2 = cancelled
             $table->softDeletes();
             $table->timestamps();

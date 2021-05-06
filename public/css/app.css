@@ -11137,6 +11137,9 @@ textarea.form-control-lg {
 .table-special table th .col-action.action-2 {
   min-width: 160px;
 }
+.table-special table th .col-action.action-1 {
+  min-width: 80px;
+}
 .table-special table td {
   padding: 1rem 0.5rem !important;
 }
@@ -11152,6 +11155,10 @@ textarea.form-control-lg {
 }
 .table-special table .table-action a, .table-special table .table-action form {
   display: block;
+}
+.table-special table .row-disabled {
+  text-decoration: line-through;
+  color: #6c757d;
 }
 
 .table-tool {

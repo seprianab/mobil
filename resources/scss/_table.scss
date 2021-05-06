@@ -35,6 +35,10 @@
                 &.action-2 {
                     min-width: 160px;
                 }
+
+                &.action-1 {
+                    min-width: 80px;
+                }
             }
         }
 
@@ -54,6 +58,11 @@
             a, form {
                 display: block;
             }
+        }
+
+        .row-disabled {
+            text-decoration: line-through;
+            color: $text-muted;
         }
 
     }

@@ -15,4 +15,8 @@ class Car extends Model
         'stock',
         'user_id',
     ];
+
+    public function sales(){
+        return $this->hasMany('App\Models\Sale', 'car_id', 'id');
+    }
 }

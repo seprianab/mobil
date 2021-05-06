@@ -15,4 +15,8 @@ class Customer extends Model
         'email',
         'user_id',
     ];
+
+    public function sales(){
+        return $this->hasMany('App\Models\Sale', 'customer_id', 'id');
+    }
 }

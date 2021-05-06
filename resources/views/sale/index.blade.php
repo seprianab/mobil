@@ -1,15 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Customer - ')
-
-@section('content-max-width', '900px')
+@section('title', 'Sale - ')
 
 @section('content')
     
     <div class="mb-4 d-flex align-items-center justify-content-between">
-        <h3>Customer</h3>
+        <h3>Sale</h3>
         <div>
-            <a href="{{ route('customer.create') }}" class="btn btn-primary">
+            <a href="{{ route('sale.create') }}" class="btn btn-primary">
                 <i class="bi bi-plus"></i> Create New
             </a>
         </div>
@@ -29,7 +27,7 @@
                     Search
                 </button>
                 @if($is_filtered)
-                    <a class="ms-3" href="{{ route('customer.index') }}">Reset</a>
+                    <a class="ms-3" href="{{ route('sale.index') }}">Reset</a>
                 @endif
             </div>
         </div>
@@ -40,31 +38,37 @@
             <thead>
                 <tr>
                     <th class="col-fix">#</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Sales</th>
-                    <th class="col-fix"><div class="col-action action-2">&nbsp;</div></th>
+                    <th class="col-fix"><div class="col-date">Date</div></th>
+                    <th>Customer</th>
+                    <th>Car</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th class="col-fix"><div class="col-action action-1">&nbsp;</div></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($data as $index => $row)
-                <tr>
+                <tr {!! $row->status == 2 ? 'class="row-disabled"' : '' !!}>
                     <td>{{ ++$number }}</td>
-                    <td>{{ $row->name }}</td>
-                    <td>{{ $row->phone }}</td>
-                    <td>{{ $row->email }}</td>
-                    <td>{{ toNumber(count($row->sales)) }}</td>
+                    <td>{{ toDate($row->date) }}</td>
                     <td>
+                        <div>{{ $row->customer_name }}</div>
+                        <small class="text-muted">
+                            {{ $row->customer_phone }} | {{ $row->customer_email }}
+                        </small>
+                    </td>
+                    <td>{{ $row->car_name }}</td>
+                    <td>{{ toNumber($row->car_price) }}</td>
+                    <td>{{ $row->status_text }}</td>
+                    <td>
+                        @if($row->status == 1)
                         <div class="table-action">
-                            <a href="{{ route('customer.edit', ['id' => $row->id]) }}" title="Edit" class="btn btn-outline-secondary btn-sm me-2">
-                                <i class="bi bi-pencil"></i> Edit
-                            </a>
-
-                            <form method="post" action="{{ route('customer.delete', ['id' => $row->id]) }}" class="form-delete">
-                                <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="bi bi-trash"></i> Delete</button>
+                            <form method="post" action="{{ route('sale.cancel', ['id' => $row->id]) }}" class="form-cancel">
+                                @method('put')
+                                <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="bi bi-x-circle"></i> Cancel</button>
                             </form>
                         </div>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
@@ -76,14 +80,13 @@
     <div class="mt-4">
         {{ $data->links() }}
     </div>
-
     
 @endsection
 
 @push('js')
 <script>
 
-    document.querySelectorAll('.form-delete').forEach(form_delete => 
+    document.querySelectorAll('.form-cancel').forEach(form_delete => 
         form_delete.addEventListener('submit', function (e) {
             e.preventDefault();
             
@@ -93,6 +96,7 @@
                 return false;
             } else {
                 const url = this.getAttribute('action');
+                const form_data = new FormData(this);
                 const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
                 const button = this.querySelector('button');
@@ -101,8 +105,9 @@
                 button.innerHTML = 'Loading..';
 
                 axios({
-                    method: "delete",
+                    method: "post",
                     url: url,
+                    data: form_data,
                     headers: {
                         "Content-Type": "multipart/form-data",
                         "Accept": "application/json",

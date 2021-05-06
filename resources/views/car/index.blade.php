@@ -39,10 +39,11 @@
         <table class="table table-hover align-start">
             <thead>
                 <tr>
-                    <th class="col-fix"><div class="col-number">#</div></th>
+                    <th class="col-fix">#</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Stock</th>
+                    <th>Sales</th>
                     <th class="col-fix"><div class="col-action action-2">&nbsp;</div></th>
                 </tr>
             </thead>
@@ -53,6 +54,7 @@
                     <td>{{ $row->name }}</td>
                     <td>{{ toNumber($row->price) }}</td>
                     <td>{{ toNumber($row->stock) }}</td>
+                    <td>{{ toNumber(count($row->sales)) }}</td>
                     <td>
                         <div class="table-action">
                             <a href="{{ route('car.edit', ['id' => $row->id]) }}" title="Edit" class="btn btn-outline-secondary btn-sm me-2">
