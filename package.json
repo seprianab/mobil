@@ -20,6 +20,9 @@
         "vanillajs-datepicker": "^1.1.4"
     },
     "dependencies": {
-        "bootstrap": "^5.0.0"
+        "@popperjs/core": "^2.9.2",
+        "bootstrap": "^5.0.0",
+        "imask": "^6.0.7",
+        "moment": "^2.29.1"
     }
 }

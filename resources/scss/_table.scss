@@ -9,11 +9,32 @@
             border-bottom-color: $border-color !important;
             color: $secondary;
             font-size: $font-size-sm;
-            text-align: center;
             padding: 0.5rem 0.5rem !important;
 
             @include media-breakpoint-up(lg) {
                 padding: 0.5rem 1.5rem !important;
+            }
+
+            &.col-fix {
+                width: 1%;
+            }
+
+            .col-date {
+                display: block;
+                min-width: 100px;
+            }
+
+            .col-number {
+                display: block;
+                min-width: 50px;
+            }
+
+            .col-action {
+                display: block;
+
+                &.action-2 {
+                    min-width: 160px;
+                }
             }
         }
 
@@ -26,18 +47,12 @@
         }
 
         .table-action {
-            width: 32px;
-            height: 32px;
-            border-radius: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: border-color 0.3s linear;
-            border: solid 2px transparent;
 
-            &:hover {
-                cursor: pointer;
-                border: solid 1px $secondary;
+            a, form {
+                display: block;
             }
         }
 

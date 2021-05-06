@@ -11113,13 +11113,29 @@ textarea.form-control-lg {
   border-bottom-color: #dee2e6 !important;
   color: #6c757d;
   font-size: 0.875rem;
-  text-align: center;
   padding: 0.5rem 0.5rem !important;
 }
 @media (min-width: 992px) {
   .table-special table th {
     padding: 0.5rem 1.5rem !important;
   }
+}
+.table-special table th.col-fix {
+  width: 1%;
+}
+.table-special table th .col-date {
+  display: block;
+  min-width: 100px;
+}
+.table-special table th .col-number {
+  display: block;
+  min-width: 50px;
+}
+.table-special table th .col-action {
+  display: block;
+}
+.table-special table th .col-action.action-2 {
+  min-width: 160px;
 }
 .table-special table td {
   padding: 1rem 0.5rem !important;
@@ -11130,18 +11146,12 @@ textarea.form-control-lg {
   }
 }
 .table-special table .table-action {
-  width: 32px;
-  height: 32px;
-  border-radius: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.3s linear;
-  border: solid 2px transparent;
 }
-.table-special table .table-action:hover {
-  cursor: pointer;
-  border: solid 1px #6c757d;
+.table-special table .table-action a, .table-special table .table-action form {
+  display: block;
 }
 
 .table-tool {

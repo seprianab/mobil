@@ -19,4 +19,13 @@ Route::post('/', 'AuthController@login');
 Route::middleware('auth')->group(function(){
     Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
     Route::get('/logout', 'AuthController@logout')->name('logout');
+
+    Route::prefix('/car')->name('car.')->group(function(){
+        Route::get('/', 'CarController@index')->name('index');
+        Route::get('/create', 'CarController@create')->name('create');
+        Route::post('/create', 'CarController@store');
+        Route::get('/edit/{id}', 'CarController@edit')->name('edit');
+        Route::put('/edit/{id}', 'CarController@update');
+        Route::delete('/{id}', 'CarController@delete')->name('delete');
+    });
 });

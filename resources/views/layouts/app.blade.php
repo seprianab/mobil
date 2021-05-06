@@ -44,7 +44,7 @@
                             <i class="bi bi-person-circle me-1"></i> {{ auth()->user()->name }}
                         </div>
                         <div>
-                            <a href="{{ route('logout') }}">
+                            <a href="{{ route('logout') }}" onclick="return confirm('Are you sure?'); return false;">
                                 <i class="bi bi-box-arrow-right me-1"></i> Logout
                             </a>
                         </div>
