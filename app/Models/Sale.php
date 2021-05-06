@@ -36,4 +36,8 @@ class Sale extends Model
         ];
         return $status[$this->attributes['status']];
     }
+
+    public function car(){
+        return $this->belongsTo('App\Models\Car', 'car_id', 'id');
+    }
 }
