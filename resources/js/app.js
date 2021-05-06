@@ -23,6 +23,16 @@ for(var i = 0; i < form_number.length; i++){
     setFormNumber(form_number[i])
 }
 
+var form_phone = document.querySelectorAll('.form-phone');
+for(var i = 0; i < form_phone.length; i++){
+    IMask(
+        form_phone[i],
+        {
+            mask: /^\d+$/
+        }
+    );
+}
+
 var form_date = document.querySelectorAll('.form-date');
 for(var i = 0; i < form_date.length; i++){
     new Datepicker(form_date[i], {

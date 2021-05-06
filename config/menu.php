@@ -12,4 +12,10 @@ return [
         'icon' => '<i class="bi bi-minecart-loaded"></i>',
         'url' => '/car',
     ],
+    [
+        'id' => 'customer',
+        'label' => 'Customer',
+        'icon' => '<i class="bi bi-people"></i>',
+        'url' => '/customer',
+    ],
 ];

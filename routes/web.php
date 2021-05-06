@@ -28,4 +28,13 @@ Route::middleware('auth')->group(function(){
         Route::put('/edit/{id}', 'CarController@update');
         Route::delete('/{id}', 'CarController@delete')->name('delete');
     });
+
+    Route::prefix('/customer')->name('customer.')->group(function(){
+        Route::get('/', 'CustomerController@index')->name('index');
+        Route::get('/create', 'CustomerController@create')->name('create');
+        Route::post('/create', 'CustomerController@store');
+        Route::get('/edit/{id}', 'CustomerController@edit')->name('edit');
+        Route::put('/edit/{id}', 'CustomerController@update');
+        Route::delete('/{id}', 'CustomerController@delete')->name('delete');
+    });
 });
